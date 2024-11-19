@@ -1,0 +1,57 @@
+[
+    {
+        "nome": "Antonio",
+        "matricula": "10001",
+        "senha": "Aluno123",
+        "pergunta_seguranca": "Qual sua cor favorita?",
+        "resposta_seguranca": "Verde",
+        "cpf": "545.676.878-31",
+        "livros_reservados": [
+            {
+                "titulo": "1984",
+                "data_devolucao": "2024-11-26"
+            },
+            {
+                "titulo": "Percy Jackson e o Ladrao de Raios",
+                "data_devolucao": "2024-11-26"
+            }
+        ]
+    },
+    {
+        "nome": "Jose",
+        "matricula": "10002",
+        "senha": "newaluno123",
+        "pergunta_seguranca": "Qual sua cor favorita?",
+        "resposta_seguranca": "Vermelho",
+        "cpf": "523.346.578-91",
+        "livros_reservados": [
+            {
+                "titulo": "A Arte da Guerra",
+                "data_devolucao": "2024-11-26"
+            }
+        ]
+    },
+    {
+        "nome": "Carlos",
+        "matricula": "10003",
+        "senha": "alunao123",
+        "pergunta_seguranca": "Qual sua cor favorita?",
+        "resposta_seguranca": "Azul",
+        "cpf": "529.326.478-81",
+        "livros_reservados": []
+    },
+    {
+        "nome": "Fulano",
+        "matricula": "10004",
+        "senha": "senha12",
+        "pergunta_seguranca": "Qual sua comida favorita?",
+        "resposta_seguranca": "Lasanha",
+        "cpf": "787.564.342-52",
+        "livros_reservados": [
+            {
+                "titulo": "Biblia",
+                "data_devolucao": "2024-11-26"
+            }
+        ]
+    }
+]

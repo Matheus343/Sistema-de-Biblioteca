@@ -1,0 +1,32 @@
+[
+    {
+        "titulo": "1984",
+        "autor": "George Orwell",
+        "disponibilidade": false,
+        "data_devolucao": "2024-11-26"
+    },
+    {
+        "titulo": "A Arte da Guerra",
+        "autor": "Sun Tzu",
+        "disponibilidade": false,
+        "data_devolucao": "2024-11-26"
+    },
+    {
+        "titulo": "Diario de Anne Frank",
+        "autor": "Anne Frank",
+        "disponibilidade": true,
+        "data_devolucao": null
+    },
+    {
+        "titulo": "Percy Jackson e o Ladrao de Raios",
+        "autor": "Rick Riordan",
+        "disponibilidade": false,
+        "data_devolucao": "2024-11-26"
+    },
+    {
+        "titulo": "Biblia",
+        "autor": "Jesus",
+        "disponibilidade": false,
+        "data_devolucao": "2024-11-26"
+    }
+]

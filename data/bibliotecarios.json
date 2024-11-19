@@ -1,0 +1,18 @@
+[
+    {
+        "nome": "Ana",
+        "matricula": "00001",
+        "senha": "admin12",
+        "pergunta_seguranca": "Qual sua cor favorita?",
+        "resposta_seguranca": "Amarelo",
+        "cpf": "595.656.778-21"
+    },
+    {
+        "nome": "Julia",
+        "matricula": "00002",
+        "senha": "secret123",
+        "pergunta_seguranca": "Qual sua cor favorita?",
+        "resposta_seguranca": "Violeta",
+        "cpf": "576.432.156-86"
+    }
+]
