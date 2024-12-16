@@ -53,5 +53,14 @@
                 "data_devolucao": "2024-11-26"
             }
         ]
+    },
+    {
+        "nome": "fred",
+        "matricula": "10005",
+        "senha": "12345",
+        "pergunta_seguranca": "Qual sua cor favorita?",
+        "resposta_seguranca": "verde",
+        "cpf": "545.676.878-32",
+        "livros_reservados": []
     }
 ]

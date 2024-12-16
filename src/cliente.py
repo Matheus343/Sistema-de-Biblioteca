@@ -6,11 +6,11 @@ class Cliente:
         self.pergunta_seguranca = pergunta_seguranca
         self.resposta = resposta
         self.livros_reservados = []
-
+#visualização de acervo para usuarios anonimos e cadastrados
     def visualizar_acervo(self, banco_livros):
         livros = banco_livros.carregar()
         return [livro for livro in livros if livro["disponibilidade"]]
-
+#reserva de livros para clientes
     def reservar_livro(self, titulo, banco_livros):
         livros = banco_livros.carregar()
         for livro in livros:

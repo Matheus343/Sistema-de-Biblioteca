@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 from src.sistema import Sistema
 
+#UI do bibliotecario no sistema, consegue visualizar, cadastrar livros e verificar pendencias de todos os clientes
+#além de conseguir também ver os livros que ja possui reservados
+
 class PainelBibliotecario:
     def __init__(self, master):
         self.master = master

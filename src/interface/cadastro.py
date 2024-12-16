@@ -1,26 +1,37 @@
 import tkinter as tk
 from tkinter import messagebox
 from src.sistema import Sistema
+import re
+
+# UI para tela de cadastro, aqui os usuários são cadastrados no geral, tanto clientes como bibliotecários
+# possui validação de CPF e matrícula
 
 class TelaCadastro:
     def __init__(self, master):
         self.master = master
         self.master.title("Cadastro")
-        self.master.geometry("500x600")
+        self.master.geometry("600x900")
+        self.master.configure(bg="#f5f5f5")
 
-        tk.Label(master, text="Nome").pack(pady=5)
-        self.nome = tk.Entry(master)
-        self.nome.pack(pady=5)
+        # Frame centralizado com bordas arredondadas
+        self.frame = tk.Canvas(master, bg="#ffffff", highlightthickness=0)
+        self.frame.place(relx=0.5, rely=0.5, anchor="center", width=500, height=650)
+        self.create_rounded_rectangle(self.frame, 0, 0, 500, 650, radius=20, fill="#ffffff", outline="#cccccc")
 
-        tk.Label(master, text="Matrícula").pack(pady=5)
-        self.matricula = tk.Entry(master)
-        self.matricula.pack(pady=5)
+        # Título da tela
+        tk.Label(self.frame, text="Cadastro", font=("Helvetica", 20, "bold"), fg="#333333", bg="#ffffff").place(relx=0.5, rely=0.05, anchor="center")
 
-        tk.Label(master, text="Senha").pack(pady=5)
-        self.senha = tk.Entry(master, show="*")
-        self.senha.pack(pady=5)
-        
-        tk.Label(master, text="Escolha a Pergunta de Segurança").pack(pady=5)
+        # Campos de entrada organizados
+        self.create_input(self.frame, "Nome", 0.1)
+        self.nome = self.create_entry(self.frame, 0.14)
+
+        self.create_input(self.frame, "Matrícula", 0.2)
+        self.matricula = self.create_entry(self.frame, 0.24)
+
+        self.create_input(self.frame, "Senha", 0.3)
+        self.senha = self.create_entry(self.frame, 0.34, show="*")
+
+        self.create_input(self.frame, "Escolha a Pergunta de Segurança", 0.4)
         self.pergunta_seguranca = tk.StringVar()
         perguntas = [
             "Qual sua cor favorita?",
@@ -28,27 +39,61 @@ class TelaCadastro:
             "Qual o nome da professora do primeiro ano do fundamental?",
             "Qual sua comida favorita?"
         ]
-        self.pergunta_seguranca_menu = tk.OptionMenu(master, self.pergunta_seguranca, *perguntas)
-        self.pergunta_seguranca_menu.pack(pady=5)
+        self.pergunta_seguranca_menu = tk.OptionMenu(self.frame, self.pergunta_seguranca, *perguntas)
+        self.pergunta_seguranca_menu.config(font=("Helvetica", 10), bg="#eeeeee", relief="flat")
+        self.pergunta_seguranca_menu.place(relx=0.1, rely=0.44, width=350, height=30)
 
-        tk.Label(master, text="Resposta à Pergunta").pack(pady=5)
-        self.resposta_seguranca = tk.Entry(master)
-        self.resposta_seguranca.pack(pady=5)
+        self.create_input(self.frame, "Resposta à Pergunta", 0.5)
+        self.resposta_seguranca = self.create_entry(self.frame, 0.54)
 
-        tk.Label(master, text="CPF (Formato: xxx.xxx.xxx-xx)").pack(pady=5)
-        self.cpf = tk.Entry(master)
-        self.cpf.pack(pady=5)
+        self.create_input(self.frame, "CPF (Formato: xxx.xxx.xxx-xx)", 0.6)
+        self.cpf = self.create_entry(self.frame, 0.64)
 
-        tk.Label(master, text="Tipo de Cadastro").pack(pady=5)
+        # Tipo de Cadastro (Radio Buttons)
+        tk.Label(self.frame, text="Tipo de Cadastro", font=("Helvetica", 10), bg="#ffffff", fg="#555555").place(relx=0.1, rely=0.7, anchor="w")
         self.tipo = tk.StringVar(value="cliente")
-        tk.Radiobutton(master, text="Cliente", variable=self.tipo, value="cliente").pack()
-        tk.Radiobutton(master, text="Bibliotecário", variable=self.tipo, value="bibliotecario").pack()
+        tk.Radiobutton(self.frame, text="Cliente", variable=self.tipo, value="cliente", bg="#ffffff", fg="#333333").place(relx=0.3, rely=0.74, anchor="center")
+        tk.Radiobutton(self.frame, text="Bibliotecário", variable=self.tipo, value="bibliotecario", bg="#ffffff", fg="#333333").place(relx=0.7, rely=0.74, anchor="center")
 
-        tk.Button(master, text="Cadastrar", command=self.cadastrar_usuario).pack(pady=10)
-        tk.Button(master, text="Voltar", command=self.voltar).pack()
+        # Botões
+        self.create_button(self.frame, "Cadastrar", 0.85, self.cadastrar_usuario)
+        self.create_button(self.frame, "Voltar", 0.92, self.voltar)
 
         self.sistema = Sistema()
-        
+
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+        points = [x1+radius, y1,
+                  x1+radius, y1,
+                  x2-radius, y1,
+                  x2-radius, y1,
+                  x2, y1,
+                  x2, y1+radius,
+                  x2, y2-radius,
+                  x2, y2-radius,
+                  x2, y2,
+                  x2-radius, y2,
+                  x1+radius, y2,
+                  x1+radius, y2,
+                  x1, y2,
+                  x1, y2-radius,
+                  x1, y1+radius,
+                  x1, y1+radius,
+                  x1, y1]
+        return canvas.create_polygon(points, **kwargs, smooth=True)
+
+    def create_input(self, parent, text, rely):
+        tk.Label(parent, text=text, font=("Helvetica", 10), bg="#ffffff", fg="#555555").place(relx=0.1, rely=rely, anchor="w")
+
+    def create_entry(self, parent, rely, **kwargs):
+        entry = tk.Entry(parent, font=("Helvetica", 10), relief="flat", bg="#eeeeee", **kwargs)
+        entry.place(relx=0.1, rely=rely, width=350, height=30)
+        return entry
+
+    def create_button(self, parent, text, rely, command):
+        button = tk.Button(parent, text=text, font=("Helvetica", 10), bg="#4CAF50", fg="#ffffff",
+                           activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
+        button.place(relx=0.5, rely=rely, anchor="center", width=200, height=40)
+
     def cadastrar_usuario(self):
         nome = self.nome.get().strip()
         matricula = self.matricula.get().strip()
@@ -61,70 +106,32 @@ class TelaCadastro:
             messagebox.showerror("Erro", "Todos os campos devem ser preenchidos!")
             return
 
-        import re
+        # Validação do formato do CPF
         if not re.match(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$', cpf):
             messagebox.showerror("Erro", "CPF inválido! Use o formato xxx.xxx.xxx-xx.")
             return
 
+        # Cadastro e validação
         if self.tipo.get() == "cliente":
-            self.sistema.cadastrar_cliente(nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf)
-            messagebox.showinfo("Sucesso", f"Cliente '{nome}' cadastrado com sucesso!")
+            mensagem = self.sistema.cadastrar_cliente(nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf)
         elif self.tipo.get() == "bibliotecario":
-            self.sistema.cadastrar_bibliotecaria(nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf)
-            messagebox.showinfo("Sucesso", f"Bibliotecário '{nome}' cadastrado com sucesso!")
+            mensagem = self.sistema.cadastrar_bibliotecaria(nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf)
 
-        self.nome.delete(0, tk.END)
-        self.matricula.delete(0, tk.END)
-        self.senha.delete(0, tk.END)
-        self.pergunta_seguranca.set("")
-        self.resposta_seguranca.delete(0, tk.END)
-        self.cpf.delete(0, tk.END)
+        # Exibe mensagens de erro ou sucesso
+        if "Erro" in mensagem:
+            messagebox.showerror("Erro", mensagem)
+        else:
+            messagebox.showinfo("Sucesso", mensagem)
+            # Limpar os campos
+            self.nome.delete(0, tk.END)
+            self.matricula.delete(0, tk.END)
+            self.senha.delete(0, tk.END)
+            self.pergunta_seguranca.set("")
+            self.resposta_seguranca.delete(0, tk.END)
+            self.cpf.delete(0, tk.END)
 
     def voltar(self):
         from src.interface.login import TelaLogin
         self.master.destroy()
         root = tk.Tk()
         TelaLogin(root)
-        
-class TelaCadastroLivro:
-    def __init__(self, master):
-        self.master = master
-        self.master.title("Cadastro de Livros")
-        self.master.geometry("300x300")
-
-        tk.Label(master, text="Título").pack(pady=5)
-        self.titulo = tk.Entry(master)
-        self.titulo.pack(pady=5)
-
-        tk.Label(master, text="Autor").pack(pady=5)
-        self.autor = tk.Entry(master)
-        self.autor.pack(pady=5)
-
-        tk.Button(master, text="Cadastrar Livro", command=self.cadastrar_livro).pack(pady=10)
-        tk.Button(master, text="Voltar", command=self.voltar).pack()
-
-        self.sistema = Sistema()
-
-    def cadastrar_livro(self):
-        titulo = self.titulo.get()
-        autor = self.autor.get()
-
-        if titulo and autor:
-            novo_livro = {
-                "titulo": titulo,
-                "autor": autor,
-                "disponibilidade": True,
-                "data_devolucao": None
-            }
-            self.sistema.banco_livros.adicionar(novo_livro)
-            messagebox.showinfo("Sucesso", f"Livro '{titulo}' cadastrado com sucesso!")
-            self.titulo.delete(0, tk.END)
-            self.autor.delete(0, tk.END)
-        else:
-            messagebox.showerror("Erro", "Todos os campos devem ser preenchidos!")
-
-    def voltar(self):
-        from src.interface.painel_biblio import PainelBibliotecario
-        self.master.destroy()
-        root = tk.Tk()
-        PainelBibliotecario(root)

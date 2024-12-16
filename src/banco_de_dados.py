@@ -1,5 +1,5 @@
 import json
-
+#classe para gerenciamento do banco de dados em .json
 class BancoDeDados:
     def __init__(self, arquivo):
         self.arquivo = arquivo

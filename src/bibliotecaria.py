@@ -3,7 +3,7 @@ class Bibliotecaria:
         self.nome = nome
         self.matricula = matricula
         self.senha = senha
-
+#criação de livros no sistema
     def cadastrar_livro(self, titulo, autor, banco_livros):
         novo_livro = {
             "titulo": titulo,
@@ -13,7 +13,7 @@ class Bibliotecaria:
         }
         banco_livros.adicionar(novo_livro)
         return f"Livro '{titulo}' cadastrado com sucesso."
-
+#criação de clientes no sistema 
     def cadastrar_cliente(self, nome, matricula, senha, pergunta, resposta, banco_clientes):
         novo_cliente = {
             "nome": nome,
@@ -25,7 +25,7 @@ class Bibliotecaria:
         }
         banco_clientes.adicionar(novo_cliente)
         return f"Cliente '{nome}' cadastrado com sucesso."
-
+#delete de cliente no sistema
     def remover_cliente(self, matricula, banco_clientes):
         clientes = banco_clientes.carregar()
         clientes = [c for c in clientes if c["matricula"] != matricula]
