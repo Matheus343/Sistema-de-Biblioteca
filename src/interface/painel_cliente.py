@@ -42,11 +42,11 @@ class PainelCliente:
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=250, height=40)
 
-    # Função para abrir a tela de Acervo
     def abrir_acervo(self):
         self.master.destroy()
         root = tk.Tk()
-        TelaAcervo(root)
+        TelaAcervo(root, self.cliente, self.sistema)  # Passa cliente e sistema
+
 
     def visualizar_pendencias(self):
         pendencias = self.sistema.listar_pendencias(self.cliente["matricula"])

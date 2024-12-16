@@ -84,7 +84,6 @@ class TelaLogin:
 
         usuario = self.sistema.login(matricula, senha, perfil)
         if usuario:
-            messagebox.showinfo("Login", f"Bem-vindo, {usuario['nome']}!")
             if perfil == "bibliotecaria":
                 from src.interface.painel_biblio import PainelBibliotecario
                 self.master.destroy()
