@@ -7,7 +7,7 @@ import re
 # possui validação de CPF e matrícula
 
 class TelaCadastro:
-    def __init__(self, master):
+    def __init__(self, master) -> None:
         self.master = master
         self.master.title("Cadastro")
         self.master.geometry("600x900")
@@ -61,7 +61,7 @@ class TelaCadastro:
 
         self.sistema = Sistema()
 
-    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs) -> None:
         points = [x1+radius, y1,
                   x1+radius, y1,
                   x2-radius, y1,
@@ -81,20 +81,20 @@ class TelaCadastro:
                   x1, y1]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def create_input(self, parent, text, rely):
+    def create_input(self, parent, text, rely) -> None:
         tk.Label(parent, text=text, font=("Helvetica", 10), bg="#ffffff", fg="#555555").place(relx=0.1, rely=rely, anchor="w")
 
-    def create_entry(self, parent, rely, **kwargs):
+    def create_entry(self, parent, rely, **kwargs) -> None:
         entry = tk.Entry(parent, font=("Helvetica", 10), relief="flat", bg="#eeeeee", **kwargs)
         entry.place(relx=0.1, rely=rely, width=350, height=30)
         return entry
 
-    def create_button(self, parent, text, rely, command):
+    def create_button(self, parent, text, rely, command) -> None:
         button = tk.Button(parent, text=text, font=("Helvetica", 10), bg="#4CAF50", fg="#ffffff",
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=200, height=40)
 
-    def cadastrar_usuario(self):
+    def cadastrar_usuario(self) -> None:
         nome = self.nome.get().strip()
         matricula = self.matricula.get().strip()
         senha = self.senha.get().strip()
@@ -130,14 +130,14 @@ class TelaCadastro:
             self.resposta_seguranca.delete(0, tk.END)
             self.cpf.delete(0, tk.END)
 
-    def voltar(self):
+    def voltar(self) -> None:
         from src.interface.login import TelaLogin
         self.master.destroy()
         root = tk.Tk()
         TelaLogin(root)
         
 class TelaCadastroLivro:
-    def __init__(self, master):
+    def __init__(self, master) -> None:
         self.master = master
         self.master.title("Cadastro de Livros")
         self.master.geometry("600x700")
@@ -164,26 +164,26 @@ class TelaCadastroLivro:
         self.create_button(self.frame, "Cadastrar Livro", 0.6, self.cadastrar_livro)
         self.create_button(self.frame, "Voltar", 0.7, self.voltar)
 
-    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs) -> None:
         points = [x1+radius, y1, x2-radius, y1, x2, y1, x2, y1+radius,
                   x2, y2-radius, x2, y2, x2-radius, y2, x1+radius, y2,
                   x1, y2, x1, y2-radius, x1, y1+radius, x1, y1]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def create_input(self, parent, text, rely):
+    def create_input(self, parent, text, rely) -> None:
         tk.Label(parent, text=text, font=("Helvetica", 12), bg="#ffffff", fg="#555555").place(relx=0.1, rely=rely, anchor="w")
 
-    def create_entry(self, parent, rely, **kwargs):
+    def create_entry(self, parent, rely, **kwargs) -> None:
         entry = tk.Entry(parent, font=("Helvetica", 10), relief="flat", bg="#eeeeee", **kwargs)
         entry.place(relx=0.1, rely=rely, width=350, height=30)
         return entry
 
-    def create_button(self, parent, text, rely, command):
+    def create_button(self, parent, text, rely, command) -> None:
         button = tk.Button(parent, text=text, font=("Helvetica", 12), bg="#4CAF50", fg="#ffffff",
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=250, height=40)
 
-    def cadastrar_livro(self):
+    def cadastrar_livro(self) -> None:
         titulo = self.titulo.get().strip()
         autor = self.autor.get().strip()
 
@@ -201,7 +201,7 @@ class TelaCadastroLivro:
         else:
             messagebox.showerror("Erro", "Todos os campos devem ser preenchidos!")
 
-    def voltar(self):
+    def voltar(self) -> None:
         from src.interface.painel_biblio import PainelBibliotecario
         self.master.destroy()
         root = tk.Tk()

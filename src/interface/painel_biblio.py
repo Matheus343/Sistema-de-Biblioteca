@@ -4,7 +4,7 @@ from src.sistema import Sistema
 from src.interface.cadastro import TelaCadastroLivro, TelaCadastro
 
 class PainelBibliotecario:
-    def __init__(self, master):
+    def __init__(self, master) -> None:
         self.master = master
         self.master.title("Painel do Bibliotecário")
         self.master.geometry("600x700")
@@ -36,38 +36,38 @@ class PainelBibliotecario:
         # Botão de sair
         self.create_button(self.frame, "Sair", 0.80, self.sair)
 
-    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs) -> None:
         points = [x1+radius, y1, x2-radius, y1, x2, y1, x2, y1+radius,
                   x2, y2-radius, x2, y2, x2-radius, y2, x1+radius, y2,
                   x1, y2, x1, y2-radius, x1, y1+radius, x1, y1]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def create_button(self, parent, text, rely, command):
+    def create_button(self, parent, text, rely, command) -> None:
         button = tk.Button(parent, text=text, font=("Helvetica", 12), bg="#4CAF50", fg="#ffffff",
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=250, height=40)
 
-    def cadastrar_livro(self):
+    def cadastrar_livro(self) -> None:
         self.master.destroy()
         root = tk.Tk()
         TelaCadastroLivro(root)
 
-    def listar_livros(self):
+    def listar_livros(self) -> None:
         livros = self.sistema.listar_livros()
         livros_str = "\n".join([f"{livro['titulo']} - {livro['autor']}" for livro in livros])
         messagebox.showinfo("Livros Cadastrados", livros_str or "Nenhum livro cadastrado.")
 
-    def cadastrar_cliente(self):
+    def cadastrar_cliente(self) -> None:
         self.master.destroy()
         root = tk.Tk()
         TelaCadastro(root)
 
-    def listar_clientes(self):
+    def listar_clientes(self) -> None:
         clientes = self.sistema.listar_clientes()
         clientes_str = "\n".join([f"{cliente['nome']} - {cliente['matricula']}" for cliente in clientes])
         messagebox.showinfo("Clientes Cadastrados", clientes_str or "Nenhum cliente cadastrado.")
 
-    def gerenciar_pendencias(self):
+    def gerenciar_pendencias(self) -> None:
         pendencias_window = tk.Toplevel(self.master)
         pendencias_window.title("Gerenciar Pendências")
         pendencias_window.geometry("400x400")
@@ -88,14 +88,14 @@ class PainelBibliotecario:
             else:
                 tk.Label(pendencias_window, text=f"Cliente: {cliente['nome']} (Sem pendências)").pack(pady=5)
 
-    def remover_pendencias(self, cliente):
+    def remover_pendencias(self, cliente) -> None:
         for livro in cliente["livros_reservados"]:
             if "data_devolucao" in livro:
                 livro["data_devolucao"] = None
         self.sistema.banco_clientes.salvar(self.sistema.banco_clientes.carregar())
         messagebox.showinfo("Sucesso", f"Pendências removidas para o cliente {cliente['nome']}.")
 
-    def sair(self):
+    def sair(self) -> None:
         from src.interface.login import TelaLogin
         self.master.destroy()
         root = tk.Tk()

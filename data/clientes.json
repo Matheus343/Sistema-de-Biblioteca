@@ -62,5 +62,14 @@
         "resposta_seguranca": "verde",
         "cpf": "545.676.878-32",
         "livros_reservados": []
+    },
+    {
+        "nome": "Marcia",
+        "matricula": "10006",
+        "senha": "210102",
+        "pergunta_seguranca": "Qual sua comida favorita?",
+        "resposta_seguranca": "Lasanha",
+        "cpf": "145.657.654-98",
+        "livros_reservados": []
     }
 ]

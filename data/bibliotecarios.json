@@ -14,5 +14,13 @@
         "pergunta_seguranca": "Qual sua cor favorita?",
         "resposta_seguranca": "Violeta",
         "cpf": "576.432.156-86"
+    },
+    {
+        "nome": "Michael",
+        "matricula": "00003",
+        "senha": "123456",
+        "pergunta_seguranca": "Qual o nome do seu animal de estima\u00e7\u00e3o?",
+        "resposta_seguranca": "Figo",
+        "cpf": "256.579.215-45"
     }
 ]

@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 class TelaPendencias:
-    def __init__(self, master, cliente, pendencias):
+    def __init__(self, master, cliente, pendencias) -> None:
         self.master = master
         self.master.title("Pendências")
         self.master.geometry("600x700")
@@ -34,18 +34,18 @@ class TelaPendencias:
         # Botão de voltar
         self.create_button(self.frame, "Voltar", 0.9, self.voltar)
 
-    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs) -> None:
         points = [x1+radius, y1, x2-radius, y1, x2, y1, x2, y1+radius,
                   x2, y2-radius, x2, y2, x2-radius, y2, x1+radius, y2,
                   x1, y2, x1, y2-radius, x1, y1+radius, x1, y1]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def create_button(self, parent, text, rely, command):
+    def create_button(self, parent, text, rely, command) -> None:
         button = tk.Button(parent, text=text, font=("Helvetica", 12), bg="#4CAF50", fg="#ffffff",
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=200, height=40)
 
-    def voltar(self):
+    def voltar(self) -> None:
         from src.interface.painel_cliente import PainelCliente
         self.master.destroy()
         root = tk.Tk()

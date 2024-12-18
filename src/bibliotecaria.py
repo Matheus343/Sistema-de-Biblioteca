@@ -1,10 +1,10 @@
 class Bibliotecaria:
-    def __init__(self, nome, matricula, senha):
+    def __init__(self, nome, matricula, senha) -> None:
         self.nome = nome
         self.matricula = matricula
         self.senha = senha
 #criação de livros no sistema
-    def cadastrar_livro(self, titulo, autor, banco_livros):
+    def cadastrar_livro(self, titulo, autor, banco_livros) -> None:
         novo_livro = {
             "titulo": titulo,
             "autor": autor,
@@ -14,7 +14,7 @@ class Bibliotecaria:
         banco_livros.adicionar(novo_livro)
         return f"Livro '{titulo}' cadastrado com sucesso."
 #criação de clientes no sistema 
-    def cadastrar_cliente(self, nome, matricula, senha, pergunta, resposta, banco_clientes):
+    def cadastrar_cliente(self, nome, matricula, senha, pergunta, resposta, banco_clientes) -> None:
         novo_cliente = {
             "nome": nome,
             "matricula": matricula,
@@ -26,7 +26,7 @@ class Bibliotecaria:
         banco_clientes.adicionar(novo_cliente)
         return f"Cliente '{nome}' cadastrado com sucesso."
 #delete de cliente no sistema
-    def remover_cliente(self, matricula, banco_clientes):
+    def remover_cliente(self, matricula, banco_clientes) -> None:
         clientes = banco_clientes.carregar()
         clientes = [c for c in clientes if c["matricula"] != matricula]
         banco_clientes.salvar(clientes)

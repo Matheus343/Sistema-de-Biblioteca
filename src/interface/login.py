@@ -8,7 +8,7 @@ from tkinter import simpledialog
 # cada tipo de login (cliente/bibliotecario) leva a determinada area do sistema que possui diferentes funções
 
 class TelaLogin:
-    def __init__(self, master):
+    def __init__(self, master) -> None:
         self.master = master
         self.master.title("Login")
         self.master.geometry("600x700")  # Tela maior verticalmente
@@ -44,7 +44,7 @@ class TelaLogin:
 
         self.sistema = Sistema()
 
-    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs) -> None:
         points = [x1+radius, y1,
                   x1+radius, y1,
                   x2-radius, y1,
@@ -64,20 +64,20 @@ class TelaLogin:
                   x1, y1]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def create_input(self, parent, text, rely):
+    def create_input(self, parent, text, rely) -> None:
         tk.Label(parent, text=text, font=("Helvetica", 10), bg="#ffffff", fg="#555555").place(relx=0.1, rely=rely, anchor="w")
 
-    def create_entry(self, parent, rely, **kwargs):
+    def create_entry(self, parent, rely, **kwargs) -> None:
         entry = tk.Entry(parent, font=("Helvetica", 10), relief="flat", bg="#eeeeee", **kwargs)
         entry.place(relx=0.1, rely=rely, width=350, height=30)
         return entry
 
-    def create_button(self, parent, text, rely, command):
+    def create_button(self, parent, text, rely, command) -> None:
         button = tk.Button(parent, text=text, font=("Helvetica", 10), bg="#4CAF50", fg="#ffffff",
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=250, height=40)
 
-    def realizar_login(self):
+    def realizar_login(self) -> None:
         matricula = self.matricula.get()
         senha = self.senha.get()
         perfil = self.perfil.get()
@@ -97,18 +97,18 @@ class TelaLogin:
         else:
             messagebox.showerror("Erro", "Credenciais inválidas!")
 
-    def abrir_tela_cadastro(self):
+    def abrir_tela_cadastro(self) -> None:
         from src.interface.cadastro import TelaCadastro
         self.master.destroy()
         root = tk.Tk()
         TelaCadastro(root)
 
-    def abrir_acervo_anonimo(self):
+    def abrir_acervo_anonimo(self) -> None:
         self.master.destroy()
         root = tk.Tk()
         TelaAcervoAnonimo(root)
 
-    def redefinir_senha(self):
+    def redefinir_senha(self) -> None:
         redefinir_window = tk.Toplevel(self.master)
         redefinir_window.title("Redefinir Senha")
         redefinir_window.geometry("600x700")  # Tela maior verticalmente
@@ -137,7 +137,7 @@ class TelaLogin:
         cpf_entry = self.create_entry(frame, 0.5)
 
         # Botão Validar
-        def validar_usuario():
+        def validar_usuario() -> None:
             matricula = matricula_entry.get().strip()
             cpf = cpf_entry.get().strip()
 
@@ -159,7 +159,7 @@ class TelaLogin:
 
             resposta_entry = self.create_entry(frame, 0.68)
 
-            def redefinir():
+            def redefinir() -> None:
                 resposta = resposta_entry.get().strip()
                 if resposta.lower() != usuario.get("resposta_seguranca", "").lower():
                     messagebox.showerror("Erro", "Resposta incorreta!")

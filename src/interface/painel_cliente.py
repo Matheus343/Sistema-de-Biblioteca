@@ -5,7 +5,7 @@ from src.interface.pendencias import TelaPendencias
 from src.interface.reserva_livro import TelaReservaLivro
 
 class PainelCliente:
-    def __init__(self, master, cliente):
+    def __init__(self, master, cliente) -> None:
         self.master = master
         self.master.title("Painel do Cliente")
         self.master.geometry("600x700")
@@ -29,7 +29,7 @@ class PainelCliente:
         self.create_button(self.frame, "Meus Livros Reservados", 0.55, self.meus_livros_reservados)
         self.create_button(self.frame, "Sair", 0.75, self.sair)
 
-    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs):
+    def create_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius=25, **kwargs) -> None:
         points = [x1+radius, y1,
                   x2-radius, y1, x2, y1, x2, y1+radius,
                   x2, y2-radius, x2, y2, x2-radius, y2,
@@ -37,18 +37,18 @@ class PainelCliente:
                   x1, y1+radius, x1, y1]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def create_button(self, parent, text, rely, command):
+    def create_button(self, parent, text, rely, command) -> None:
         button = tk.Button(parent, text=text, font=("Helvetica", 12), bg="#4CAF50", fg="#ffffff",
                            activebackground="#45a049", activeforeground="#ffffff", relief="flat", command=command)
         button.place(relx=0.5, rely=rely, anchor="center", width=250, height=40)
 
-    def abrir_acervo(self):
+    def abrir_acervo(self) -> None:
         self.master.destroy()
         root = tk.Tk()
         TelaAcervo(root, self.cliente, self.sistema)  # Passa cliente e sistema
 
 
-    def visualizar_pendencias(self):
+    def visualizar_pendencias(self) -> None:
         pendencias = self.sistema.listar_pendencias(self.cliente["matricula"])
         self.master.destroy()
         root = tk.Tk()
@@ -56,12 +56,12 @@ class PainelCliente:
         
     from src.interface.reserva_livro import TelaReservaLivro
 
-    def reservar_livro(self):
+    def reservar_livro(self) -> None:
         self.master.destroy()
         root = tk.Tk()
         self.TelaReservaLivro(root, self.cliente, self.sistema)
 
-    def meus_livros_reservados(self):
+    def meus_livros_reservados(self) -> None:
         clientes = self.sistema.banco_clientes.carregar()
         self.cliente = next((c for c in clientes if c["matricula"] == self.cliente["matricula"]), self.cliente)
 
@@ -72,7 +72,7 @@ class PainelCliente:
         else:
             tk.messagebox.showinfo("Meus Livros Reservados", "Você não reservou nenhum livro.")
 
-    def sair(self):
+    def sair(self) -> None:
         from src.interface.login import TelaLogin
         self.master.destroy()
         root = tk.Tk()

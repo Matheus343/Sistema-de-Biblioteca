@@ -8,12 +8,12 @@ from datetime import datetime, timedelta
 
 class Sistema:
     #carrega os bancos de dados .json
-    def __init__(self):
+    def __init__(self) -> None:
         self.banco_clientes = BancoDeDados("data/clientes.json")
         self.banco_livros = BancoDeDados("data/livros.json")
         self.banco_bibliotecarios = BancoDeDados("data/bibliotecarios.json")
         
-    def cpf_existe(self, cpf):
+    def cpf_existe(self, cpf) -> None:
         """
         Verifica se o CPF já existe entre os clientes ou bibliotecários.
         """
@@ -29,7 +29,7 @@ class Sistema:
 
         return False
     
-    def matricula_existe(self, matricula):
+    def matricula_existe(self, matricula) -> None:
         """
         Verifica se a matrícula já existe entre os clientes ou bibliotecários.
         """
@@ -44,7 +44,7 @@ class Sistema:
         return False
     
     #classe para cadastro dos clientes, salva os valores atribuidos a nome, matricula, senha e etc ao clientes.json
-    def cadastrar_cliente(self, nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf):
+    def cadastrar_cliente(self, nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf) -> None:
         if self.cpf_existe(cpf):
             return f"Erro: O CPF {cpf} já está cadastrado."
         if self.matricula_existe(matricula):
@@ -63,7 +63,7 @@ class Sistema:
         return f"Cliente '{nome}' cadastrado com sucesso."
 
     #classe para cadastro dos bibliotecarios, salva os valores atribuidos a nome, matricula, senha e etc ao bibliotecarios.json   
-    def cadastrar_bibliotecaria(self, nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf):
+    def cadastrar_bibliotecaria(self, nome, matricula, senha, pergunta_seguranca, resposta_seguranca, cpf) -> None:
         if self.cpf_existe(cpf):
             return f"Erro: O CPF {cpf} já está cadastrado."
         if self.matricula_existe(matricula):
@@ -81,7 +81,7 @@ class Sistema:
         return f"Bibliotecária '{nome}' cadastrada com sucesso."
 
 #função de login, utiliza os dados carregados no .json para validar o login
-    def login(self, matricula, senha, perfil="cliente"):
+    def login(self, matricula, senha, perfil="cliente") -> None:
         if perfil == "cliente":
             usuarios = self.banco_clientes.carregar()
         elif perfil == "bibliotecaria":
@@ -94,15 +94,15 @@ class Sistema:
                 return usuario
         return None
 #listagem de livros já cadastrados
-    def listar_livros(self):
+    def listar_livros(self) -> None:
         return self.banco_livros.carregar()
     
 #listagem de clientes já cadastrados
-    def listar_clientes(self):
+    def listar_clientes(self) -> None:
         return self.banco_clientes.carregar()
     
 #função para reserva de livros, associa um datetime a eles para verificar pendências
-    def reservar_livro(self, matricula_cliente, titulo):
+    def reservar_livro(self, matricula_cliente, titulo) -> None:
         clientes = self.banco_clientes.carregar()
         livros = self.banco_livros.carregar()
 
@@ -135,7 +135,7 @@ class Sistema:
             self.banco_livros.salvar(livros)
             return f"Livro '{titulo}' não disponível. Você foi adicionado à fila de espera."
 #lista as pendências
-    def listar_pendencias(self, matricula_cliente):
+    def listar_pendencias(self, matricula_cliente) -> None:
         clientes = self.banco_clientes.carregar()
         cliente = next((c for c in clientes if c["matricula"] == matricula_cliente), None)
 
