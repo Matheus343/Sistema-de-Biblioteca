@@ -89,10 +89,21 @@ class PainelBibliotecario:
                 tk.Label(pendencias_window, text=f"Cliente: {cliente['nome']} (Sem pendências)").pack(pady=5)
 
     def remover_pendencias(self, cliente) -> None:
-        for livro in cliente["livros_reservados"]:
-            if "data_devolucao" in livro:
-                livro["data_devolucao"] = None
-        self.sistema.banco_clientes.salvar(self.sistema.banco_clientes.carregar())
+        #carregar todos os clientes do banco de dados
+        clientes = self.sistema.banco_clientes.carregar()
+
+        #encontrar o cliente correspondente pelo identificador único (ex.: matrícula)
+        for c in clientes:
+            if c["matricula"] == cliente["matricula"]:
+                #remover todas as pendências, limpando a lista de livros reservados
+                c["livros_reservados"] = [
+                    livro for livro in c.get("livros_reservados", []) if not livro.get("data_devolucao")
+                ]
+
+        #salvar as alterações de volta no JSON
+        self.sistema.banco_clientes.salvar(clientes)
+
+        #mostrar mensagem de sucesso
         messagebox.showinfo("Sucesso", f"Pendências removidas para o cliente {cliente['nome']}.")
 
     def sair(self) -> None:

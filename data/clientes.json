@@ -6,16 +6,7 @@
         "pergunta_seguranca": "Qual sua cor favorita?",
         "resposta_seguranca": "Verde",
         "cpf": "545.676.878-31",
-        "livros_reservados": [
-            {
-                "titulo": "1984",
-                "data_devolucao": "2024-11-26"
-            },
-            {
-                "titulo": "Percy Jackson e o Ladrao de Raios",
-                "data_devolucao": "2024-11-26"
-            }
-        ]
+        "livros_reservados": []
     },
     {
         "nome": "Jose",
